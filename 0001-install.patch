@@ -1,0 +1,55 @@
+From 3bfec11e603de8d281b2dfdfe9494475f6583cef Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Thu, 15 Aug 2024 12:43:22 +0800
+Subject: [PATCH] install
+
+---
+ PLIS.desktop | 11 +++++++++++
+ PLIS.pro     | 10 +++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+ create mode 100644 PLIS.desktop
+
+diff --git a/PLIS.desktop b/PLIS.desktop
+new file mode 100644
+index 0000000..ae038d1
+--- /dev/null
++++ b/PLIS.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=PLIS
++Name=PLIS
++Name[zh_CN]=PLIS
++Icon=PLIS
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=PLIS
++Version=1.11
+\ No newline at end of file
+diff --git a/PLIS.pro b/PLIS.pro
+index 2d13641..0a5d9e7 100644
+--- a/PLIS.pro
++++ b/PLIS.pro
+@@ -80,9 +80,17 @@ FORMS += \
+ 
+ # Default rules for deployment.
+ qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
++else: unix:!android: #target.path = /opt/$${TARGET}/bin
+ !isEmpty(target.path): INSTALLS += target
+ 
++target.path = $$PREFIX/bin
++desktop.files = PLIS.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons
++icons.files = img/PLIS.png
++
++INSTALLS += target desktop icons
++
+ RESOURCES += \
+     Resources.qrc \
+ 
+-- 
+2.43.4
+
