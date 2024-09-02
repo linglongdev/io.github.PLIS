@@ -1,0 +1,29 @@
+version: "1"
+
+package:
+  id: io.github.PLIS
+  name: PLIS
+  version: 1.11.0.1
+  kind: app
+  description: |
+    Protein Ligand Interaction Software (PLIS) for the analysis of dissociation constants between protein and ligand
+
+command:
+  - /opt/apps/io.github.PLIS/files/bin/PLIS
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/PINT-NMR/PLIS.git
+    version: master
+    commit: 0835bc2f175e18aed08b05ae01c1ff98bc2c7c05
+
+build: |
+  cd /project/linglong/sources/PLIS.git
+  git apply ../../../0001-install.patch
+  cp img/logo.png img/PLIS.png
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
